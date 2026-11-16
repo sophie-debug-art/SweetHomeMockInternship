@@ -56,7 +56,7 @@ public class HomePieceOfFurniture extends HomeObject implements PieceOfFurniture
   /** 
    * The properties on which home furniture may be sorted.  
    */
-  public enum SortableProperty {CATALOG_ID, NAME, WIDTH, DEPTH, HEIGHT, MOVABLE, 
+  public enum SortableProperty {CATALOG_ID, NAME, WIDTH, DEPTH, HEIGHT, MOVABLE, VOLUME,
                                 DOOR_OR_WINDOW, COLOR, TEXTURE, VISIBLE, X, Y, ELEVATION, ANGLE,
                                 PRICE, VALUE_ADDED_TAX, VALUE_ADDED_TAX_PERCENTAGE, PRICE_VALUE_ADDED_TAX_INCLUDED, LEVEL};
   private static final Map<SortableProperty, Comparator<HomePieceOfFurniture>> SORTABLE_PROPERTY_COMPARATORS;
@@ -112,6 +112,17 @@ public class HomePieceOfFurniture extends HomeObject implements PieceOfFurniture
           return HomePieceOfFurniture.compare(piece1.movable, piece2.movable);
         }
       });
+
+
+
+    SORTABLE_PROPERTY_COMPARATORS.put(SortableProperty.VOLUME, new Comparator<HomePieceOfFurniture>() {
+      public int compare(HomePieceOfFurniture piece1, HomePieceOfFurniture piece2) {
+        return Float.compare(piece1.getVolume(), piece2.getVolume());
+      }
+    });
+
+
+
     SORTABLE_PROPERTY_COMPARATORS.put(SortableProperty.DOOR_OR_WINDOW, new Comparator<HomePieceOfFurniture>() {
         public int compare(HomePieceOfFurniture piece1, HomePieceOfFurniture piece2) {
           return HomePieceOfFurniture.compare(piece1.doorOrWindow, piece2.doorOrWindow);
@@ -268,6 +279,8 @@ public class HomePieceOfFurniture extends HomeObject implements PieceOfFurniture
   private float                  angle;
   private boolean                modelMirrored;
   private Level                  level;
+
+  private float                   volume;
   
   private transient PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
   private transient Shape shapeCache;
@@ -325,6 +338,7 @@ public class HomePieceOfFurniture extends HomeObject implements PieceOfFurniture
       this.visible = true;
       this.x = this.width / 2;
       this.y = this.depth / 2;
+      this.volume = getVolume();
     }
   }
 
@@ -358,6 +372,15 @@ public class HomePieceOfFurniture extends HomeObject implements PieceOfFurniture
   public void removePropertyChangeListener(PropertyChangeListener listener) {
     this.propertyChangeSupport.removePropertyChangeListener(listener);
   }
+
+
+  public  float getVolume() {
+    return this.width * this.height * this.depth;
+  }
+
+
+
+
 
   /**
    * Returns the catalog ID of this piece of furniture or <code>null</code> if it doesn't exist.
