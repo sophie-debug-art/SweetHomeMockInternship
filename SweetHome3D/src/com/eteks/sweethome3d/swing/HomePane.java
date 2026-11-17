@@ -1427,6 +1427,8 @@ public class HomePane extends JRootPane implements HomeView {
         displayPropertyActions, HomePieceOfFurniture.SortableProperty.DEPTH);
     addActionToMap(ActionType.DISPLAY_HOME_FURNITURE_HEIGHT, 
         displayPropertyActions, HomePieceOfFurniture.SortableProperty.HEIGHT);
+    addActionToMap(ActionType.DISPLAY_HOME_FURNITURE_VOLUME,
+            displayPropertyActions, HomePieceOfFurniture.SortableProperty.VOLUME);
     addActionToMap(ActionType.DISPLAY_HOME_FURNITURE_X, 
         displayPropertyActions, HomePieceOfFurniture.SortableProperty.X);
     addActionToMap(ActionType.DISPLAY_HOME_FURNITURE_Y, 

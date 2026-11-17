@@ -157,6 +157,7 @@ public class Home implements Serializable, Cloneable {
         HomePieceOfFurniture.SortableProperty.NAME,
         HomePieceOfFurniture.SortableProperty.WIDTH,
         HomePieceOfFurniture.SortableProperty.DEPTH,
+        HomePieceOfFurniture.SortableProperty.VOLUME,
         HomePieceOfFurniture.SortableProperty.HEIGHT,
         HomePieceOfFurniture.SortableProperty.VISIBLE});
     // Init transient lists and other fields

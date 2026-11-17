@@ -1134,6 +1134,8 @@ public class FurnitureTable extends JTable implements View, Printable {
           return preferences.getLocalizedString(FurnitureTable.class, "xColumn");
         case Y :
           return preferences.getLocalizedString(FurnitureTable.class, "yColumn");
+        case VOLUME:
+          return preferences.getLocalizedString(FurnitureTable.class, "volumeColumn");
         case ELEVATION : 
           return preferences.getLocalizedString(FurnitureTable.class, "elevationColumn");
         case ANGLE :
@@ -1173,7 +1175,9 @@ public class FurnitureTable extends JTable implements View, Printable {
           return 120; 
         case WIDTH :
         case DEPTH :
-        case HEIGHT : 
+        case HEIGHT :
+        case VOLUME:
+          return 90;
         case X : 
         case Y :
         case ELEVATION : 
@@ -1202,6 +1206,26 @@ public class FurnitureTable extends JTable implements View, Printable {
     /**
      * Returns column renderers.
      */
+    private TableCellRenderer getVolumeRenderer() {
+      return new DefaultTableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(
+                JTable table,
+                Object value,
+                boolean isSelected,
+                boolean hasFocus,
+                int row,
+                int column) {
+          Component component =
+                  super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column
+                  );
+          setHorizontalAlignment(JLabel.RIGHT);
+          return component;
+        }
+      };
+    }
+
+
     private TableCellRenderer getColumnRenderer(HomePieceOfFurniture.SortableProperty property, 
                                                 UserPreferences preferences) {
       switch (property) {
@@ -1215,6 +1239,8 @@ public class FurnitureTable extends JTable implements View, Printable {
           return getSizeRenderer(HomePieceOfFurniture.SortableProperty.DEPTH, preferences);
         case HEIGHT : 
           return getSizeRenderer(HomePieceOfFurniture.SortableProperty.HEIGHT, preferences);
+        case VOLUME :
+          return getVolumeRenderer();
         case X : 
           return getSizeRenderer(HomePieceOfFurniture.SortableProperty.X, preferences);
         case Y :
