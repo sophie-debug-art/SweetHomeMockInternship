@@ -1206,6 +1206,7 @@ public class FurnitureTable extends JTable implements View, Printable {
     /**
      * Returns column renderers.
      */
+
     private TableCellRenderer getVolumeRenderer() {
       return new DefaultTableCellRenderer() {
         @Override
@@ -1216,11 +1217,29 @@ public class FurnitureTable extends JTable implements View, Printable {
                 boolean hasFocus,
                 int row,
                 int column) {
-          Component component =
-                  super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column
-                  );
+
+          String volumeText = "";
+
+          if (value instanceof HomePieceOfFurniture) {
+            HomePieceOfFurniture piece =
+                    (HomePieceOfFurniture) value;
+
+            volumeText = String.format(
+                    "%.2f",
+                    piece.getVolume()
+            );
+          }
+
           setHorizontalAlignment(JLabel.RIGHT);
-          return component;
+
+          return super.getTableCellRendererComponent(
+                  table,
+                  volumeText,
+                  isSelected,
+                  hasFocus,
+                  row,
+                  column
+          );
         }
       };
     }
